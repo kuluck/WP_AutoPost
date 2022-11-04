@@ -300,8 +300,9 @@ namespace WP_AutoPost
                 {
                     this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss ") + key + " 키워드 검색 시작")));
                     this.File_info(this.listBox3.Items[0].ToString());
-
-                    string kurl = "https://s.search.naver.com/p/blog/search.naver?where=blog&sm=tab_pge&api_type=1&query=" + key;
+                    DateTime fromd = DateTime.Now.AddYears(-1);
+                    DateTime tod = DateTime.Now.AddMonths(-1);
+                    string kurl = "https://s.search.naver.com/p/blog/search.naver?where=blog&sm=tab_pge&api_type=1&query=" + key + "&sm=mtb_opt&sm=mtb_viw.blog&nso=so%3Add%2Cp%3Afrom"+ fromd + "to" + tod;
                     Thread.Sleep(1000);
 
                     HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
