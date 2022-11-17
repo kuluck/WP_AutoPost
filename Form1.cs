@@ -29,7 +29,7 @@ namespace WP_AutoPost
         private Thread thread1;
         private ChromeDriverService chromeDriverService;
         private ChromeOptions chromeOptions;
-        private ChromeDriver driver;        
+        private ChromeDriver driver;
         private TextBox texttitle = new TextBox();
         private TextBox textbody = new TextBox();
         private List<string> script = new List<string>();
@@ -75,16 +75,16 @@ namespace WP_AutoPost
         {
             foreach (Process process in ((IEnumerable<Process>)Process.GetProcesses()).Where<Process>((Func<Process, bool>)(pr => pr.ProcessName == "chromedriver")))
                 process.Kill();
-            textBox1.Text = Properties.Settings.Default.id;
-            textBox2.Text = Properties.Settings.Default.pw;
-            numericUpDown1.Value = Properties.Settings.Default.bcnt;
-            textBox3.Text = Properties.Settings.Default.tconn;
-            textBox5.Text = Properties.Settings.Default.tpost;
-            textBox4.Text = Properties.Settings.Default.wconn;
-            textBox6.Text = Properties.Settings.Default.wpost;
-            numericUpDown2.Value = Properties.Settings.Default.sec;
-            dateTimePicker1.Value = Properties.Settings.Default.date;
-            numericUpDown3.Value = Properties.Settings.Default.delay;
+            //textBox1.Text = Properties.Settings.Default.id;
+            //textBox2.Text = Properties.Settings.Default.pw;
+            //numericUpDown1.Value = Properties.Settings.Default.bcnt;
+            //textBox3.Text = Properties.Settings.Default.tconn;
+            //textBox5.Text = Properties.Settings.Default.tpost;
+            //textBox4.Text = Properties.Settings.Default.wconn;
+            //textBox6.Text = Properties.Settings.Default.wpost;
+            //numericUpDown2.Value = Properties.Settings.Default.sec;
+            //dateTimePicker1.Value = Properties.Settings.Default.date;
+            //numericUpDown3.Value = Properties.Settings.Default.delay;
             switch (Properties.Settings.Default.radio)
             {
                 case "1":
@@ -92,7 +92,7 @@ namespace WP_AutoPost
                     break;
                 case "2":
                     radioButton2.Checked = true;
-                    break;                
+                    break;
             }
         }
 
@@ -104,9 +104,6 @@ namespace WP_AutoPost
                 label7.Text = "티스토리 접속 링크";
                 textBox3.Visible = true;
                 textBox4.Visible = false;
-                label10.Text = "티스토리 글작성 링크";
-                textBox5.Visible = true;
-                textBox6.Visible = false;
                 label12.Visible = false;
                 dateTimePicker1.Visible = false;
                 Properties.Settings.Default.radio = "1";
@@ -123,9 +120,6 @@ namespace WP_AutoPost
                 textBox3.Visible = false;
                 textBox4.Visible = true;
                 radioButton1.Checked = false;
-                label10.Text = "워드프레스 글작성 링크";
-                textBox5.Visible = false;
-                textBox6.Visible = true;
                 label12.Visible = true;
                 dateTimePicker1.Visible = true;
                 Properties.Settings.Default.radio = "2";
@@ -205,7 +199,14 @@ namespace WP_AutoPost
                         string line = sr.ReadLine();
                         if (line != " ")
                         {
-                            text.Text = text.Text + line + Environment.NewLine;
+                            if (text.Text.Length < 1)
+                            {
+                                this.Invoke((Action)(() => text.Text = line));
+                            }
+                            else
+                            {
+                                this.Invoke((Action)(() => text.Text = text.Text + ":" + line));
+                            }                            
                         }
                     }
                     catch { continue; }
@@ -213,44 +214,44 @@ namespace WP_AutoPost
                 sr.Close();
             }
 
-            if (file.IndexOf("body") > -1)
-            {
-                if (text.Text.IndexOf(".") > -1)
-                {
-                    text.Text = text.Text.Replace(".", "\n");
-                }
+            //if (file.IndexOf("body") > -1)
+            //{
+            //    if (text.Text.IndexOf(".") > -1)
+            //    {
+            //        text.Text = text.Text.Replace(".", "\n");
+            //    }
 
-                if (text.Text.IndexOf("니다.") > -1 | text.Text.IndexOf("니다") > -1)
-                {
-                    text.Text = text.Text.Replace("니다", "니다.\n");
-                }
+            //    if (text.Text.IndexOf("니다.") > -1 | text.Text.IndexOf("니다") > -1)
+            //    {
+            //        text.Text = text.Text.Replace("니다", "니다.\n");
+            //    }
 
-                if (text.Text.IndexOf("데요.") > -1 | text.Text.IndexOf("데요") > -1)
-                {
-                    text.Text = text.Text.Replace("데요", "데요.\n");
-                }
+            //    if (text.Text.IndexOf("데요.") > -1 | text.Text.IndexOf("데요") > -1)
+            //    {
+            //        text.Text = text.Text.Replace("데요", "데요.\n");
+            //    }
 
-                if (text.Text.IndexOf("어요.") > -1 | text.Text.IndexOf("어요") > -1)
-                {
-                    text.Text = text.Text.Replace("어요", "어요.\n");
-                }
+            //    if (text.Text.IndexOf("어요.") > -1 | text.Text.IndexOf("어요") > -1)
+            //    {
+            //        text.Text = text.Text.Replace("어요", "어요.\n");
+            //    }
 
-                if (text.Text.IndexOf("해요.") > -1 | text.Text.IndexOf("해요") > -1)
-                {
-                    text.Text = text.Text.Replace("해요", "해요.\n");
-                }
-                if (text.Text.IndexOf("했죠.") > -1 | text.Text.IndexOf("했죠") > -1)
-                {
-                    text.Text = text.Text.Replace("했죠", "했죠.\n");
-                }
-            }
+            //    if (text.Text.IndexOf("해요.") > -1 | text.Text.IndexOf("해요") > -1)
+            //    {
+            //        text.Text = text.Text.Replace("해요", "해요.\n");
+            //    }
+            //    if (text.Text.IndexOf("했죠.") > -1 | text.Text.IndexOf("했죠") > -1)
+            //    {
+            //        text.Text = text.Text.Replace("했죠", "했죠.\n");
+            //    }
+            //}
             Thread.Sleep(100);
         }
 
         private void DataListinsert(object Data, ListBox lst)
         {
             try
-            {                
+            {
                 this.Invoke((Action)(() => lst.Items.Add(Data)));
                 this.Invoke((Action)(() => lst.Update()));
             }
@@ -287,649 +288,848 @@ namespace WP_AutoPost
         private void Process1()
         {
             this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") + " 프로그램 시작")));
-            this.File_info(this.listBox3.Items[0].ToString());
+            this.Invoke((Action)(() => this.File_info(this.listBox3.Items[0].ToString())));
 
             bool flags = false;
             bool login = false;
             int index1 = 0;
 
-            while(index1 != dataGridView1.RowCount - 1)
+            string sNid = string.Empty;
+            string Snpw = string.Empty;
+            string[] strkey = null;
+            string key = string.Empty;
+            int keycnt = 0;
+            string platform = string.Empty;
+            string link = string.Empty;
+            int spcnt = 1;
+            DateTime regdate = DateTime.Now;
+            int Delay = 1;
+            string restitle = string.Empty;
+            string resbody = string.Empty;
+            string ttt = string.Empty;
+            string ttb = string.Empty;
+
+            while (index1 != dataGridView1.RowCount)
             {
-                string key = dataGridView1[0, index1].Value.ToString();
+                this.Invoke((Action)(() => this.listBox1.Items.Clear()));
+                this.Invoke((Action)(() => this.listBox2.Items.Clear()));
+
                 try
                 {
-                    this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss ") + key + " 키워드 검색 시작")));
-                    this.File_info(this.listBox3.Items[0].ToString());
-                    DateTime fromd = DateTime.Now.AddYears(-1);
-                    DateTime tod = DateTime.Now.AddMonths(-1);
-                    string kurl = "https://s.search.naver.com/p/blog/search.naver?where=blog&sm=tab_pge&api_type=1&query=" + key + "&sm=mtb_opt&sm=mtb_viw.blog&nso=so%3Add%2Cp%3Afrom"+ fromd + "to" + tod;
-                    Thread.Sleep(1000);
-
-                    HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-                    using (WebClient client = new WebClient())
+                    this.Invoke((Action)(() => sNid = dataGridView1[1, index1].Value.ToString()));
+                    this.Invoke((Action)(() => Snpw = dataGridView1[2, index1].Value.ToString()));
+                    if (dataGridView1[3, index1].Value.ToString().IndexOf(",") > -1)
                     {
-                        client.Encoding = Encoding.UTF8;
-                        string source = client.DownloadString(kurl);
-                        doc.LoadHtml(source);                        
+                        this.Invoke((Action)(() => strkey = dataGridView1[3, index1].Value.ToString().Split(new char[] { ',' },StringSplitOptions.None)));
                     }
-
-                    string[] result = doc.ParsedText.Split(new string[] { "sp_blog" }, StringSplitOptions.None);
-                    Thread.Sleep(100);
-
-                    for (int index2 = 1; index2 <= numericUpDown1.Value; index2++)
+                    else
                     {
-                        flags = false;
-                        string burl = indexParse(result[index2], "data-url=\\\"", "\\\" aria-pressed");
-                        Thread.Sleep(100);
-                        if (burl.IndexOf("naver.com") > -1)
-                        {
-                            if (listBox1.Items.Count > 1)
-                            {
-                                for (int index3 = 0; index3 < listBox1.Items.Count; index3++)
-                                {
-                                    if (burl == listBox1.Items[index3].ToString())
-                                    {
-                                        flags = true;
-                                        break;
-                                    }                                                                                                                
-                                }
-                                if (!flags)
-                                {
-                                    DataListinsert(burl, listBox1);
-                                    Thread.Sleep(100);
-                                }
-                            }
-                            else
-                            {
-                                DataListinsert(burl, listBox1);
-                                Thread.Sleep(100);
-                            }
-                        }
+                        this.Invoke((Action)(() => key = dataGridView1[3, index1].Value.ToString()));
                     }
-                    this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss ") + key + " 키워드 검색 완료")));
-                    this.File_info(this.listBox3.Items[0].ToString());
-                }
-                catch { }
-                DataListDelete(dataGridView1);
-                if (dataGridView1.RowCount - 1 == index1)
-                {
-                    flags = true;
-                }
-            }
-
-            if (!flags)
-            {
-                this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") + " 조회할 링크가 없습니다.")));
-                this.File_info(this.listBox3.Items[0].ToString());
-                this.DoStop();
-            }
-            else
-            {
-                this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") + " 구글 검색 시작")));
-                this.File_info(this.listBox3.Items[0].ToString());
-                flags = false;
-                int index3 = 0;
-                int index5 = 0;
-                try
-                {
-                    this.chromeDriverService = ChromeDriverService.CreateDefaultService();
-                    this.chromeOptions = new ChromeOptions();
-                    this.chromeOptions.AddArgument("--disable-extensions");
-                    this.chromeOptions.AddArgument("--disable-notifications");
-                    this.chromeOptions.AddArgument("window-size=1250,1050");
-                    this.chromeOptions.AddArgument("window-position=680,0");
-                    this.chromeOptions.AddArgument("--incognito");                        
-                    this.chromeOptions.AddExcludedArgument("enable-automation");
-                    this.chromeOptions.AddArgument("disable-infobars");
-                    this.chromeDriverService.HideCommandPromptWindow = true;
-                    this.driver = new ChromeDriver(this.chromeDriverService, this.chromeOptions);
-                    this.driver.Manage().Cookies.DeleteAllCookies();
-                    this.driver.Navigate().GoToUrl("about:blank");
-                    Thread.Sleep(1000);
-                    while (index3 != listBox1.Items.Count)
+                    this.Invoke((Action)(() => platform = dataGridView1[4, index1].Value.ToString()));
+                    this.Invoke((Action)(() => keycnt = Convert.ToInt32(dataGridView1[5, index1].Value.ToString())));
+                    this.Invoke((Action)(() => link = dataGridView1[6, index1].Value.ToString()));
+                    this.Invoke((Action)(() => spcnt = Convert.ToInt32(dataGridView1[7, index1].Value.ToString())));
+                    this.Invoke((Action)(() => regdate = Convert.ToDateTime(dataGridView1[8, index1].Value.ToString())));
+                    this.Invoke((Action)(() => Delay = Convert.ToInt32(dataGridView1[9, index1].Value.ToString())));
+                    if (strkey != null)
                     {
-                        string linkurl = listBox1.Items[index3].ToString();
-                        this.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
-                        this.driver.Navigate().GoToUrl("https://www.google.com/search?q=" + linkurl);                        
-                        Thread.Sleep(Convert.ToInt32(numericUpDown3.Value) * 1000);
-
-                        try
+                        for (int kcnt = 0; kcnt < strkey.Count(); kcnt++)
                         {
-                            this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") + " 구글 검색 결과 확인")));
-                            this.File_info(this.listBox3.Items[0].ToString());
-                            IWebElement res = this.driver.FindElement(By.CssSelector("#topstuff > div.mnr-c > div > p:nth-child(1)"));
-                            if (res.Text.IndexOf("일치하는 검색결과가 없습니다") > -1)
+                            this.Invoke((Action)(() => key = strkey[kcnt].ToString()));
+                            try
                             {
-                                this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") + " 검색 링크 저장")));
-                                this.File_info(this.listBox3.Items[0].ToString());
-                                DataListinsert(linkurl, listBox2);
+                                this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss ") + key + " 키워드 검색 시작")));
+                                this.Invoke((Action)(() => this.File_info(this.listBox3.Items[0].ToString())));
+                                DateTime fromd = DateTime.Now.AddYears(-1);
+                                DateTime tod = DateTime.Now.AddMonths(-1);
+                                string kurl = "https://s.search.naver.com/p/blog/search.naver?where=blog&sm=tab_pge&api_type=1&query=" + key + "&sm=tab_opt&nso=so:r,p:from" + fromd.ToString("yyyy''MM''dd") + "to" + tod.ToString("yyyy''MM''dd");
                                 Thread.Sleep(1000);
 
-                                this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") + " 작성 가능 원고 추출 시작")));
-                                this.File_info(this.listBox3.Items[0].ToString());
-                                flags = false;
-                                
-                                this.textbody.Clear();
-                                string burl = listBox2.Items[index5].ToString();
-                                try
+                                HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+                                using (WebClient client = new WebClient())
                                 {
-                                    HtmlAgilityPack.HtmlDocument doc2 = new HtmlAgilityPack.HtmlDocument();
-                                    using (WebClient client2 = new WebClient())
-                                    {
-                                        client2.Encoding = Encoding.UTF8;
-                                        string ssource = client2.DownloadString(burl);
-                                        doc2.LoadHtml(ssource);
-                                    }
-                                    HtmlAgilityPack.HtmlNodeCollection ifnode = doc2.DocumentNode.SelectNodes("//iframe[@src]");
-                                    string postview = string.Empty;
-                                    foreach (var node in ifnode)
-                                    {
-                                        HtmlAgilityPack.HtmlAttribute attr = node.Attributes["src"];
-                                        postview = attr.Value;
-                                    }
+                                    client.Encoding = Encoding.UTF8;
+                                    string source = client.DownloadString(kurl);
+                                    doc.LoadHtml(source);
+                                }
 
-                                    string vurl = "https://blog.naver.com" + postview;
-                                    HtmlAgilityPack.HtmlDocument doc3 = new HtmlAgilityPack.HtmlDocument();
-                                    using (WebClient client3 = new WebClient())
+                                string[] result = doc.ParsedText.Split(new string[] { "sp_blog" }, StringSplitOptions.None);
+                                Thread.Sleep(100);
+
+                                for (int index2 = 1; index2 <= keycnt; index2++)
+                                {
+                                    flags = false;
+                                    string burl = indexParse(result[index2], "data-url=\\\"", "\\\" aria-pressed");
+                                    Thread.Sleep(100);
+                                    if (burl.IndexOf("naver.com") > -1)
                                     {
-                                        client3.Encoding = Encoding.UTF8;
-                                        string ssource = client3.DownloadString(vurl);
-                                        doc3.LoadHtml(ssource);
-                                    }
-
-                                    HtmlAgilityPack.HtmlNode setitle = doc3.DocumentNode.SelectSingleNode("//div[@class='se-module se-module-text se-title-text']");
-                                    HtmlAgilityPack.HtmlNodeCollection setext = doc3.DocumentNode.SelectNodes("//div[@class='se-component se-text se-l-default']");
-
-                                    string title = setitle.InnerText.Replace("\n", "").Trim();
-                                    this.texttitle.Text = title;
-
-                                    foreach (var tex in setext)
-                                    {
-                                        try
+                                        if (listBox1.Items.Count > 1)
                                         {
-                                            string bodytx = tex.InnerText;
-                                            string bodytxx = bodytx.Replace("\n", "").Trim();
-
-                                            if (bodytxx != "")
+                                            for (int index3 = 0; index3 < listBox1.Items.Count; index3++)
                                             {
-                                                this.textbody.Text = this.textbody.Text + bodytxx + Environment.NewLine;
+                                                if (burl == listBox1.Items[index3].ToString())
+                                                {
+                                                    flags = true;
+                                                    break;
+                                                }
                                             }
+                                            if (!flags)
+                                            {
+                                                this.Invoke((Action)(() => DataListinsert(burl, listBox1)));
+                                                Thread.Sleep(100);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            this.Invoke((Action)(() => DataListinsert(burl, listBox1)));
                                             Thread.Sleep(100);
                                         }
-                                        catch { continue; }
                                     }
-                                    int returnStr = int.Parse(cntStr.Matches(textbody.Text, 0).Count.ToString());
-                                    int textLentgh = textbody.Text.Trim().Length - returnStr;
-                                    if (textLentgh > numericUpDown2.Value)
+                                }
+                                this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss ") + key + " 키워드 검색 완료")));
+                                this.Invoke((Action)(() => this.File_info(this.listBox3.Items[0].ToString())));
+                                flags = true;
+                            }
+                            catch { flags = false; }
+                        }
+                    }
+                    else
+                    {
+                        try
+                        {
+                            this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss ") + key + " 키워드 검색 시작")));
+                            this.Invoke((Action)(() => this.File_info(this.listBox3.Items[0].ToString())));
+                            DateTime fromd = DateTime.Now.AddYears(-1);
+                            DateTime tod = DateTime.Now.AddMonths(-1);
+
+                            string kurl = "https://s.search.naver.com/p/blog/search.naver?where=blog&sm=tab_pge&api_type=1&query=" + key + "&sm=tab_opt&nso=so:r,p:from" + fromd.ToString("yyyy''MM''dd") + "to" + tod.ToString("yyyy''MM''dd");
+                            Thread.Sleep(1000);
+
+                            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+                            using (WebClient client = new WebClient())
+                            {
+                                client.Encoding = Encoding.UTF8;
+                                string source = client.DownloadString(kurl);
+                                doc.LoadHtml(source);
+                            }
+
+                            string[] result = doc.ParsedText.Split(new string[] { "sp_blog" }, StringSplitOptions.None);
+                            Thread.Sleep(100);
+
+                            for (int index2 = 1; index2 <= keycnt; index2++)
+                            {
+                                flags = false;
+                                string burl = indexParse(result[index2], "data-url=\\\"", "\\\" aria-pressed");
+                                Thread.Sleep(100);
+                                if (burl.IndexOf("naver.com") > -1)
+                                {
+                                    if (listBox1.Items.Count > 1)
                                     {
-                                        //string[] filenm = burl.Split(new char[] { '/' }, StringSplitOptions.None);
-                                        //string fnm = filenm[3] + "-" + filenm[4];
-                                        string fnm = burl.Replace("https://", "").Replace("/", ".");
-                                        File_save(texttitle.Text.Trim(), fnm + "_title");
-                                        File_save(textbody.Text.Trim(), fnm + "_body");
-                                        //index5++;
-                                        flags = true;
+                                        for (int index3 = 0; index3 < listBox1.Items.Count; index3++)
+                                        {
+                                            if (burl == listBox1.Items[index3].ToString())
+                                            {
+                                                flags = true;
+                                                break;
+                                            }
+                                        }
+                                        if (!flags)
+                                        {
+                                            DataListinsert(burl, listBox1);
+                                            Thread.Sleep(100);
+                                        }
                                     }
                                     else
                                     {
-                                        DataListDelete2(listBox2, index5);                                        
+                                        DataListinsert(burl, listBox1);
+                                        Thread.Sleep(100);
                                     }
-                                    Thread.Sleep(100);
                                 }
-                                catch { }                                    
-                                
+                            }
+                            this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss ") + key + " 키워드 검색 완료")));
+                            this.Invoke((Action)(() => this.File_info(this.listBox3.Items[0].ToString())));
+                            flags = true;
+                        }
+                        catch { flags = false; }
+                    }
+                    if (!flags)
+                    {
+                        this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") + " 조회할 링크가 없습니다.")));
+                        this.Invoke((Action)(() => this.File_info(this.listBox3.Items[0].ToString())));
+                        //this.Invoke((Action)(() => DataListDelete(dataGridView1)));
+                    }
+                    else
+                    {
+                        this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") + " 구글 검색 시작")));
+                        this.File_info(this.listBox3.Items[0].ToString());
+                        flags = false;
+                        login = false;
+                        int index3 = 0;
+                        int index5 = 0;
+                        try
+                        {
+                            this.chromeDriverService = ChromeDriverService.CreateDefaultService();
+                            this.chromeOptions = new ChromeOptions();
+                            this.chromeOptions.AddArgument("--disable-extensions");
+                            this.chromeOptions.AddArgument("--disable-notifications");
+                            this.chromeOptions.AddArgument("window-size=1250,1050");
+                            this.chromeOptions.AddArgument("window-position=680,0");
+                            this.chromeOptions.AddArgument("--incognito");
+                            this.chromeOptions.AddExcludedArgument("enable-automation");
+                            this.chromeOptions.AddArgument("disable-infobars");
+                            this.chromeDriverService.HideCommandPromptWindow = true;
+                            this.driver = new ChromeDriver(this.chromeDriverService, this.chromeOptions);
+                            this.driver.Manage().Cookies.DeleteAllCookies();
+                            this.driver.Navigate().GoToUrl("about:blank");
+                            Thread.Sleep(1000);
+                            while (index3 != listBox1.Items.Count)
+                            {
+                                string linkurl = listBox1.Items[index3].ToString();
+                                this.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
+                                this.driver.Navigate().GoToUrl("https://www.google.com/search?q=" + linkurl);
+                                Thread.Sleep(Delay * 1000);
 
-                                if (!flags)
+                                try
                                 {
-                                    this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") + " 발행 할 수 있는 원고가 없습니다.")));
+                                    this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") + " 구글 검색 결과 확인")));
                                     this.File_info(this.listBox3.Items[0].ToString());
-                                    //this.DoStop();
-                                    Thread.Sleep(1000);
-                                    //this.driver.Quit();
-                                }
-                                else
-                                {
-                                    this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") + " 원고 발행 시작")));
-                                    this.File_info(this.listBox3.Items[0].ToString());
-                                    flags = false;
-                                    //int index6 = 0;
-                                    this.Script_info();
-                                    int woncount = this.script.Count();
-
-                                    if (radioButton1.Checked == true)
+                                    IWebElement res = this.driver.FindElement(By.CssSelector("#topstuff > div.mnr-c > div > p:nth-child(1)"));
+                                    if (res.Text.IndexOf("일치하는 검색결과가 없습니다") > -1)
                                     {
-                                        this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") + " 티스토리 이동 및 로그인")));
+                                        this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") + " 검색 링크 저장")));
                                         this.File_info(this.listBox3.Items[0].ToString());
+                                        this.Invoke((Action)(() => this.DataListinsert(linkurl, listBox2)));
+                                        Thread.Sleep(1000);
+
+                                        this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") + " 작성 가능 원고 추출 시작")));
+                                        this.File_info(this.listBox3.Items[0].ToString());
+                                        flags = false;
+
+                                        this.Invoke((Action)(() => this.textbody.Clear()));
+                                        string burl = listBox2.Items[index5].ToString();
                                         try
                                         {
-                                            this.driver.Navigate().GoToUrl(textBox3.Text);
-                                            this.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-                                            Thread.Sleep(1000);
-
-                                            while (true)
+                                            HtmlAgilityPack.HtmlDocument doc2 = new HtmlAgilityPack.HtmlDocument();
+                                            using (WebClient client2 = new WebClient())
                                             {
-
+                                                client2.Encoding = Encoding.UTF8;
+                                                string ssource = client2.DownloadString(burl);
+                                                doc2.LoadHtml(ssource);
                                             }
-                                        }
-                                        catch { }
-                                    }
-                                    else if (radioButton2.Checked == true)
-                                    {
-                                        this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") + " 워드프레스 이동 및 로그인")));
-                                        this.File_info(this.listBox3.Items[0].ToString());
-                                        try
-                                        {
-                                            if (!login)
+                                            HtmlAgilityPack.HtmlNodeCollection ifnode = doc2.DocumentNode.SelectNodes("//iframe[@src]");
+                                            string postview = string.Empty;
+                                            foreach (var node in ifnode)
                                             {
-                                                this.driver.Navigate().GoToUrl(textBox4.Text + "/wp-admin");
-                                                this.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-                                                Thread.Sleep(1000);
-
-                                                while (true)
-                                                {
-                                                    try
-                                                    {
-                                                        Actions actions = new Actions((IWebDriver)this.driver);
-                                                        IWebElement wid = this.driver.FindElement(By.CssSelector("input[id*='user_login']"));
-                                                        actions.MoveToElement(wid).Click().Perform();
-                                                        Clipboard.SetText(textBox1.Text);
-                                                        SendKeys.SendWait("^{v}");
-                                                        Thread.Sleep(1000);
-                                                        break;
-                                                    }
-                                                    catch { }
-                                                }
-
-                                                while (true)
-                                                {
-                                                    try
-                                                    {
-                                                        Actions actions = new Actions((IWebDriver)this.driver);
-                                                        IWebElement wpw = this.driver.FindElement(By.CssSelector("input[id*='user_pass']"));
-                                                        actions.MoveToElement(wpw).Click().Perform();
-                                                        Clipboard.SetText(textBox2.Text);
-                                                        SendKeys.SendWait("^{v}");
-                                                        Thread.Sleep(1000);
-                                                        break;
-                                                    }
-                                                    catch { }
-                                                }
-
-                                                while (true)
-                                                {
-                                                    try
-                                                    {
-                                                        Actions actions = new Actions((IWebDriver)this.driver);
-                                                        IWebElement lgsmit = this.driver.FindElement(By.CssSelector("input[id*='wp-submit']"));
-                                                        actions.MoveToElement(lgsmit).Click().Perform();
-                                                        this.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-                                                        Thread.Sleep(1000);
-                                                        break;
-                                                    }
-                                                    catch { }
-                                                }
-
-                                                for (int idx1 = 1; idx1 < 3; idx1++)
-                                                {
-                                                    Thread.Sleep(1000);
-                                                    try
-                                                    {
-                                                        if (this.driver.FindElement(By.CssSelector("li[id*='wp-admin-bar-my-account']")).Displayed == true)
-                                                        {
-                                                            flags = true;
-                                                            login = true;
-                                                            break;
-                                                        }
-                                                    }
-                                                    catch { }
-                                                }
+                                                HtmlAgilityPack.HtmlAttribute attr = node.Attributes["src"];
+                                                postview = attr.Value;
                                             }
-                                            else
-                                            {
-                                                flags = true;
-                                            }
-                                            Thread.Sleep(1000);
 
-                                            if (!flags)
+                                            string vurl = "https://blog.naver.com" + postview;
+                                            HtmlAgilityPack.HtmlDocument doc3 = new HtmlAgilityPack.HtmlDocument();
+                                            using (WebClient client3 = new WebClient())
                                             {
-                                                this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") + " 워드프레스 로그인 실패")));
-                                                this.File_info(this.listBox3.Items[0].ToString());
-                                                this.driver.Quit();
-                                                this.DoStop();
-                                                Thread.Sleep(1000);                                                
+                                                client3.Encoding = Encoding.UTF8;
+                                                string ssource = client3.DownloadString(vurl);
+                                                doc3.LoadHtml(ssource);
                                             }
-                                            else
-                                            {
-                                                this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") + " 워드프레스 글 작성 시작")));
-                                                this.File_info(this.listBox3.Items[0].ToString());
-                                                flags = false;
-                                                
-                                                this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss ") + (index5 + 1) + "번째 작성")));
-                                                this.File_info(this.listBox3.Items[0].ToString());
-                                                this.driver.Navigate().GoToUrl(textBox6.Text + "/wp-admin/post-new.php");
-                                                this.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-                                                Thread.Sleep(1000);
 
+                                            HtmlAgilityPack.HtmlNode setitle = doc3.DocumentNode.SelectSingleNode("//div[@class='se-module se-module-text se-title-text']");
+                                            HtmlAgilityPack.HtmlNodeCollection setext = doc3.DocumentNode.SelectNodes("//div[@class='se-component se-text se-l-default']");
+
+                                            string title = setitle.InnerText.Replace("\n", "").Trim();
+                                            this.Invoke((Action)(() => this.texttitle.Text = title));
+
+                                            foreach (var tex in setext)
+                                            {
                                                 try
                                                 {
-                                                    if (this.driver.FindElement(By.CssSelector("div[class*='components-modal__content']")).Displayed == true)
+                                                    string bodytx = tex.InnerText;
+                                                    string bodytxx = bodytx.Replace("\n", "").Trim();
+
+                                                    if (bodytxx != "")
                                                     {
+                                                        this.Invoke((Action)(() => this.textbody.Text = this.textbody.Text + bodytxx + Environment.NewLine));
+                                                    }
+                                                    Thread.Sleep(100);
+                                                }
+                                                catch { continue; }
+                                            }
+                                            int returnStr = int.Parse(cntStr.Matches(textbody.Text, 0).Count.ToString());
+                                            int textLentgh = textbody.Text.Trim().Length - returnStr;
+                                            if (textLentgh >= spcnt && textLentgh < 2500)
+                                            {
+                                                //string[] filenm = burl.Split(new char[] { '/' }, StringSplitOptions.None);
+                                                //string fnm = filenm[3] + "-" + filenm[4];
+                                                string fnm = burl.Replace("https://", "").Replace("/", ".");
+                                                ttt = "";
+                                                ttb = "";
+                                                try
+                                                {
+                                                    if (link.IndexOf("https://") > -1)
+                                                    {
+                                                        ttt = link.Replace("http://", "");
+                                                        ttb = link.Replace("http://", "");
+                                                    }
+                                                    else
+                                                    {
+                                                        ttt = link.Replace("http://", "");
+                                                        ttb = link.Replace("http://", "");
+                                                    }
+                                                }
+                                                catch { }
+                                                this.Invoke((Action)(() => this.File_save(texttitle.Text.Trim(), ttt, fnm + "_title")));
+                                                this.Invoke((Action)(() => this.File_save(textbody.Text.Trim(), ttb, fnm + "_body")));
+                                                //index5++;
+                                                flags = true;
+                                            }
+                                            else
+                                            {
+                                                this.Invoke((Action)(() => this.DataListDelete2(listBox2, index5)));
+                                            }
+                                            Thread.Sleep(100);
+                                        }
+                                        catch { }
+
+
+                                        if (!flags)
+                                        {
+                                            this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") + " 발행 할 수 있는 원고가 없습니다.")));
+                                            this.Invoke((Action)(() => this.File_info(this.listBox3.Items[0].ToString())));
+                                            //this.DoStop();
+                                            Thread.Sleep(1000);
+                                            //this.driver.Quit();
+                                        }
+                                        else
+                                        {
+                                            this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") + " 원고 발행 시작")));
+                                            this.Invoke((Action)(() => this.File_info(this.listBox3.Items[0].ToString())));
+                                            flags = false;
+                                            //int index6 = 0;
+                                            this.Invoke((Action)(() => this.Script_info()));
+                                            int woncount = this.script.Count();
+
+                                            if (platform == "티스토리")
+                                            {
+                                                this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") + " 티스토리 이동 및 로그인")));
+                                                this.Invoke((Action)(() => this.File_info(this.listBox3.Items[0].ToString())));
+                                                try
+                                                {
+                                                    this.driver.Navigate().GoToUrl(link);
+                                                    this.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+                                                    Thread.Sleep(1000);
+
+                                                    while (true)
+                                                    {
+
+                                                    }
+                                                }
+                                                catch { }
+                                            }
+                                            else if (platform == "워드프레스")
+                                            {
+                                                this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") + " 워드프레스 이동 및 로그인")));
+                                                this.Invoke((Action)(() => this.File_info(this.listBox3.Items[0].ToString())));
+                                                try
+                                                {                                                    
+                                                    if (!login)
+                                                    {
+                                                        this.driver.Navigate().GoToUrl(link + "/wp-admin");
+                                                        this.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+                                                        Thread.Sleep(1000);
+
                                                         while (true)
                                                         {
                                                             try
                                                             {
                                                                 Actions actions = new Actions((IWebDriver)this.driver);
-                                                                IWebElement combtn = this.driver.FindElement(By.CssSelector("button[class*='components-button has-icon']"));
-                                                                actions.MoveToElement(combtn).Click().Perform();
+                                                                IWebElement wid = this.driver.FindElement(By.CssSelector("input[id*='user_login']"));
+                                                                actions.MoveToElement(wid).Click().Perform();
+                                                                Clipboard.SetText(sNid);
+                                                                SendKeys.SendWait("^{v}");
                                                                 Thread.Sleep(1000);
                                                                 break;
                                                             }
                                                             catch { }
                                                         }
-                                                    }
-                                                }
-                                                catch { }
 
-
-                                                string postlink = listBox2.Items[index5].ToString().Replace("https://", "").Replace("/", ".");
-                                                string titlefd = Application.StartupPath + "\\script\\" + now.ToString("yyyyMMdd") + "\\title";
-                                                string bodyfd = Application.StartupPath + "\\script\\" + now.ToString("yyyyMMdd") + "\\body";
-
-                                                this.texttitle.Text = "";
-                                                this.textbody.Text = "";
-
-                                                DataTextInsert(titlefd + "\\" + postlink + "_title.txt", texttitle);
-                                                DataTextInsert(bodyfd + "\\" + postlink + "_body.txt", textbody);
-
-                                                while (true)
-                                                {
-                                                    try
-                                                    {
-                                                        Actions actions = new Actions((IWebDriver)this.driver);
-                                                        IWebElement tit = this.driver.FindElement(By.CssSelector("h1[class*='wp-block wp-block-post-title block-editor-block-list__block editor-post-title editor-post-title__input rich-text']"));
-                                                        actions.MoveToElement(tit).Click().Perform();
-                                                        SendKeys.SendWait(texttitle.Text);
-                                                        Thread.Sleep(100);
-                                                        break;
-                                                    }
-                                                    catch { }
-                                                }
-
-                                                while (true)
-                                                {
-                                                    try
-                                                    {
-                                                        Actions actions = new Actions((IWebDriver)this.driver);
-                                                        IWebElement tbody = this.driver.FindElement(By.CssSelector("p[class*='block-editor-rich-text__editable block-editor-block-list__block wp-block is-selected wp-block-paragraph rich-text']"));
-                                                        actions.MoveToElement(tbody).Click().Perform();
-                                                        Clipboard.SetText(textbody.Text);
-                                                        Thread.Sleep(1000);
-                                                        SendKeys.SendWait("^{v}");
-                                                        Thread.Sleep(3000);
-                                                        break;
-                                                    }
-                                                    catch { }
-                                                }
-
-                                                while (true)
-                                                {
-                                                    try
-                                                    {
-                                                        Actions actions = new Actions((IWebDriver)this.driver);
-                                                        IWebElement sidbar1 = this.driver.FindElement(By.CssSelector("button[class*='components-button edit-post-sidebar__panel-tab']"));
-                                                        actions.MoveToElement(sidbar1).Click().Perform();
-                                                        Thread.Sleep(1000);
-                                                        break;
-                                                    }
-                                                    catch { }
-                                                }
-
-                                                while (true)
-                                                {
-                                                    try
-                                                    {
-                                                        Actions actions = new Actions((IWebDriver)this.driver);
-                                                        IWebElement combodown = this.driver.FindElement(By.CssSelector("button[class*='components-button edit-post-post-schedule__toggle is-tertiary']"));
-                                                        actions.MoveToElement(combodown).Click().Perform();
-                                                        Thread.Sleep(1000);
-                                                        break;
-                                                    }
-                                                    catch { }
-                                                }
-                                                                                                
-                                                now = dateTimePicker1.Value.AddHours(6 * (index5 + 1));
-                                                string year = now.ToString("yyyy");
-                                                string mont = now.ToString("MM");
-                                                string day = now.ToString("dd");
-                                                string Hhch = now.ToString("tt");
-
-                                                //발행 년도
-                                                while (true)
-                                                {
-                                                    try
-                                                    {
-                                                        Actions actions = new Actions((IWebDriver)this.driver);
-                                                        IWebElement yy = this.driver.FindElement(By.CssSelector("div[class*='components-datetime__time-field components-datetime__time-field-year']"));
-                                                        actions.MoveToElement(yy).Click().Perform();
-                                                        //yy.Clear();
-                                                        Thread.Sleep(1000);
-                                                        SendKeys.SendWait("^{a}");
-                                                        Thread.Sleep(100);
-                                                        SendKeys.SendWait("{DEL}");
-                                                        Thread.Sleep(100);
-                                                        Clipboard.SetText(year);
-                                                        SendKeys.SendWait("^{v}");
-                                                        Thread.Sleep(100);
-                                                        break;
-                                                    }
-                                                    catch { }
-                                                }
-
-                                                //발행 월
-                                                while (true)
-                                                {
-                                                    try
-                                                    {
-                                                        Actions actions = new Actions((IWebDriver)this.driver);
-                                                        IWebElement Mth = this.driver.FindElement(By.CssSelector("div[class*='components-datetime__time-field components-datetime__time-field-month']"));
-                                                        actions.MoveToElement(Mth).Click().Perform();
-                                                        int opt = this.driver.FindElements(By.XPath("//div[@class='components-datetime__time-field components-datetime__time-field-month']/select/option")).Count();
-                                                        //int opt = this.driver.
-                                                        //
-                                                        for (int idx1 = 1; idx1 <= opt; idx1++)
+                                                        while (true)
                                                         {
-                                                            var mmele = this.driver.FindElement(By.CssSelector("#editor > div > div.popover-slot > div > div > div > div > div.components-datetime__time > fieldset:nth-child(1) > div > div.components-datetime__time-field.components-datetime__time-field-month > select > option:nth-child(" + idx1 + ")")).Text;                                                            
-                                                            if (mont.Substring(0,1) == "0")
+                                                            try
                                                             {
-                                                                mont.Replace("0", "");
-                                                            }    
-                                                            var mmont = mont + "월";
-                                                            if (mmele == mmont)
-                                                            {
-                                                                Actions act = new Actions((IWebDriver)this.driver);
-                                                                IWebElement mt = this.driver.FindElement(By.CssSelector("#editor > div > div.popover-slot > div > div > div > div > div.components-datetime__time > fieldset:nth-child(1) > div > div.components-datetime__time-field.components-datetime__time-field-month > select > option:nth-child(" + idx1 + ")"));
-                                                                //act.MoveToElement(mt).Release();
-                                                                //act.Click(mt);
-
-                                                                //this.Invoke((Action)(() => mt.Click()));
-                                                                mt.Click();
+                                                                Actions actions = new Actions((IWebDriver)this.driver);
+                                                                IWebElement wpw = this.driver.FindElement(By.CssSelector("input[id*='user_pass']"));
+                                                                actions.MoveToElement(wpw).Click().Perform();
+                                                                Clipboard.SetText(Snpw);
+                                                                SendKeys.SendWait("^{v}");
+                                                                Thread.Sleep(1000);
                                                                 break;
                                                             }
+                                                            catch { }
                                                         }
-                                                        Thread.Sleep(100);
-                                                        break;
-                                                    }
-                                                    catch { }
-                                                }
 
-                                                //발행 일
-                                                while (true)
-                                                {
-                                                    try
-                                                    {
-                                                        Actions actions = new Actions((IWebDriver)this.driver);
-                                                        IWebElement dd = this.driver.FindElement(By.CssSelector("div[class*='components-datetime__time-field components-datetime__time-field-day']"));
-                                                        actions.MoveToElement(dd).Click().Perform();
-                                                        //this.Invoke((Action)(() => dd.Clear()));
-                                                        SendKeys.SendWait("^{a}");
-                                                        Thread.Sleep(100);
-                                                        SendKeys.SendWait("{DEL}");
-                                                        Thread.Sleep(100);
-                                                        Clipboard.SetText(day);
-                                                        SendKeys.SendWait("^{v}");
-                                                        Thread.Sleep(100);
-                                                        break;
-                                                    }
-                                                    catch { }
-                                                }
-
-                                                //발행 시간
-                                                while (true)
-                                                {
-                                                    try
-                                                    {
-                                                        Actions actions = new Actions((IWebDriver)this.driver);
-                                                        IWebElement hour = this.driver.FindElement(By.CssSelector("input[class*='components-datetime__time-field-hours-input']"));
-                                                        actions.MoveToElement(hour).Click().Perform();
-                                                        SendKeys.SendWait("^{a}");
-                                                        Thread.Sleep(100);
-                                                        SendKeys.SendWait("{DEL}");
-                                                        Thread.Sleep(100);
-                                                        Clipboard.SetText(now.ToString("hh"));
-                                                        SendKeys.SendWait("^{v}");
-                                                        Thread.Sleep(100);
-                                                        break;
-                                                    }
-                                                    catch { }
-                                                }
-
-                                                //발행 분
-                                                while (true)
-                                                {
-                                                    try
-                                                    {
-                                                        Actions actions = new Actions((IWebDriver)this.driver);
-                                                        IWebElement sec = this.driver.FindElement(By.CssSelector("input[class*='components-datetime__time-field-minutes-input']"));
-                                                        actions.MoveToElement(sec).Click().Perform();
-                                                        SendKeys.SendWait("^{a}");
-                                                        Thread.Sleep(100);
-                                                        SendKeys.SendWait("{DEL}");
-                                                        Thread.Sleep(100);
-                                                        Clipboard.SetText(now.ToString("mm"));
-                                                        SendKeys.SendWait("^{v}");
-                                                        Thread.Sleep(100);
-                                                        break;
-                                                    }
-                                                    catch { }
-                                                }
-
-                                                //발행 오전/오후
-                                                while (true)
-                                                {
-                                                    if (Hhch == "AM")
-                                                    {
-                                                        try
+                                                        while (true)
                                                         {
-                                                            Actions actions = new Actions((IWebDriver)this.driver);
-                                                            IWebElement tt = this.driver.FindElement(By.CssSelector("button[class*='components-button components-datetime__time-am-button is-primary']"));
-                                                            actions.MoveToElement(tt).Click().Perform();                                                            
-                                                            Thread.Sleep(100);
-                                                            break;
+                                                            try
+                                                            {
+                                                                Actions actions = new Actions((IWebDriver)this.driver);
+                                                                IWebElement lgsmit = this.driver.FindElement(By.CssSelector("input[id*='wp-submit']"));
+                                                                actions.MoveToElement(lgsmit).Click().Perform();
+                                                                this.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+                                                                Thread.Sleep(1000);
+                                                                break;
+                                                            }
+                                                            catch { }
                                                         }
-                                                        catch { }
+
+                                                        for (int idx1 = 1; idx1 < 3; idx1++)
+                                                        {
+                                                            Thread.Sleep(1000);
+                                                            try
+                                                            {
+                                                                if (this.driver.FindElement(By.CssSelector("li[id*='wp-admin-bar-my-account']")).Displayed == true)
+                                                                {
+                                                                    flags = true;
+                                                                    login = true;
+                                                                    break;
+                                                                }
+                                                            }
+                                                            catch { }
+                                                        }
                                                     }
                                                     else
                                                     {
+                                                        flags = true;
+                                                    }
+                                                    Thread.Sleep(1000);
+
+                                                    if (!flags)
+                                                    {
+                                                        this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") + " 워드프레스 로그인 실패")));
+                                                        this.Invoke((Action)(() => this.File_info(this.listBox3.Items[0].ToString())));
+                                                        this.Invoke((Action)(() => this.driver.Quit()));                                                        ;
+                                                        Thread.Sleep(1000);
+                                                    }
+                                                    else
+                                                    {
+                                                        this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") + " 워드프레스 글 작성 시작")));
+                                                        this.Invoke((Action)(() => this.File_info(this.listBox3.Items[0].ToString())));
+                                                        flags = false;
+
+                                                        this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss ") + (index5 + 1) + "번째 작성")));
+                                                        this.Invoke((Action)(() => this.File_info(this.listBox3.Items[0].ToString())));
+                                                        this.driver.Navigate().GoToUrl(link + "/wp-admin/post-new.php");
+                                                        this.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+                                                        Thread.Sleep(1000);
+
                                                         try
                                                         {
-                                                            Actions actions = new Actions((IWebDriver)this.driver);
-                                                            IWebElement tt = this.driver.FindElement(By.CssSelector("button[class*='components-button components-datetime__time-pm-button is-secondary']"));
-                                                            actions.MoveToElement(tt).Click().Perform();                                                            
-                                                            Thread.Sleep(100);
-                                                            break;
+                                                            if (this.driver.FindElement(By.CssSelector("div[class*='components-modal__content']")).Displayed == true)
+                                                            {
+                                                                while (true)
+                                                                {
+                                                                    try
+                                                                    {
+                                                                        Actions actions = new Actions((IWebDriver)this.driver);
+                                                                        IWebElement combtn = this.driver.FindElement(By.CssSelector("button[class*='components-button has-icon']"));
+                                                                        actions.MoveToElement(combtn).Click().Perform();
+                                                                        Thread.Sleep(1000);
+                                                                        break;
+                                                                    }
+                                                                    catch { }
+                                                                }
+                                                            }
                                                         }
                                                         catch { }
+
+
+                                                        string postlink = listBox2.Items[index5].ToString().Replace("https://", "").Replace("/", ".");
+                                                        string titlefd = Application.StartupPath + "\\script\\" + ttt + "\\" + now.ToString("yyyyMMdd") + "\\title";
+                                                        string bodyfd = Application.StartupPath + "\\script\\" + ttb + "\\" + now.ToString("yyyyMMdd") + "\\body";
+
+                                                        this.texttitle.Text = "";
+                                                        this.textbody.Text = "";
+
+                                                        this.Invoke((Action)(() => this.DataTextInsert(titlefd + "\\" + postlink + "_title.txt", texttitle)));
+                                                        this.Invoke((Action)(() => this.DataTextInsert(bodyfd + "\\" + postlink + "_body.txt", textbody)));
+
+                                                        //타이틀번역
+                                                        try
+                                                        {
+                                                            this.Invoke((Action)(() => restitle = this.Translate(texttitle.Text)));
+                                                            this.Invoke((Action)(() => restitle = this.indexParse(restitle, "\"translatedText\":\"", "\",\"engineType")));
+                                                            this.Invoke((Action)(() => Thread.Sleep(100)));
+                                                            this.Invoke((Action)(() => restitle = restitle.Replace(":", "\r\n")));
+                                                            this.Invoke((Action)(() => Thread.Sleep(100)));
+                                                            this.Invoke((Action)(() => texttitle.Text = restitle));
+                                                        }
+                                                        catch { }
+                                                        //본문번역
+                                                        try
+                                                        {
+                                                            this.Invoke((Action)(() => resbody = this.Translate(textbody.Text)));
+                                                            this.Invoke((Action)(() => resbody = this.indexParse(resbody, "\"translatedText\":\"", "\",\"engineType")));
+                                                            this.Invoke((Action)(() => Thread.Sleep(100)));
+                                                            this.Invoke((Action)(() => resbody = resbody.Replace(":", "\r\n")));
+                                                            this.Invoke((Action)(() => Thread.Sleep(100)));
+                                                            this.Invoke((Action)(() => textbody.Text = resbody));
+                                                        }
+                                                        catch { }
+
+                                                        while (true)
+                                                        {
+                                                            try
+                                                            {
+                                                                Actions actions = new Actions((IWebDriver)this.driver);
+                                                                IWebElement tit = this.driver.FindElement(By.CssSelector("h1[class*='wp-block wp-block-post-title block-editor-block-list__block editor-post-title editor-post-title__input rich-text']"));
+                                                                actions.MoveToElement(tit).Click().Perform();
+                                                                SendKeys.SendWait(texttitle.Text);
+                                                                Thread.Sleep(100);
+                                                                break;
+                                                            }
+                                                            catch { }
+                                                        }
+
+                                                        while (true)
+                                                        {
+                                                            try
+                                                            {
+                                                                Actions actions = new Actions((IWebDriver)this.driver);
+                                                                IWebElement tbody1 = null;
+                                                                IWebElement tbody2 = null;
+                                                                try
+                                                                {
+                                                                    tbody1 = this.driver.FindElement(By.CssSelector("p[class*='block-editor-default-block-appender__content']"));
+                                                                    actions.MoveToElement(tbody1).Click().Perform();
+                                                                    Clipboard.SetText(textbody.Text);
+                                                                    Thread.Sleep(1000);
+                                                                    SendKeys.SendWait("^{v}");
+                                                                    Thread.Sleep(1000);
+                                                                    break;                                                                                                                                        
+                                                                }
+                                                                catch { }
+                                                                //block-editor-default-block-appender__content
+                                                                //block-editor-rich-text__editable block-editor-block-list__block wp-block is-selected wp-block-paragraph rich-text                                                                
+                                                                try
+                                                                {
+                                                                    tbody2 = this.driver.FindElement(By.CssSelector("p[class*='block-editor-rich-text__editable block-editor-block-list__block wp-block is-selected wp-block-paragraph rich-text']"));
+                                                                    actions.MoveToElement(tbody2).Click().Perform();
+                                                                    Clipboard.SetText(textbody.Text);
+                                                                    Thread.Sleep(1000);
+                                                                    SendKeys.SendWait("^{v}");
+                                                                    Thread.Sleep(1000);
+                                                                    break;
+                                                                }
+                                                                catch { }
+                                                            }
+                                                            catch { }
+                                                        }
+
+                                                        while (true)
+                                                        {
+                                                            try
+                                                            {
+                                                                Actions actions = new Actions((IWebDriver)this.driver);
+                                                                IWebElement sidbar1 = this.driver.FindElement(By.CssSelector("button[class*='components-button edit-post-sidebar__panel-tab']"));
+                                                                actions.MoveToElement(sidbar1).Click().Perform();
+                                                                Thread.Sleep(1000);
+                                                                break;
+                                                            }
+                                                            catch { }
+                                                        }
+
+                                                        while (true)
+                                                        {
+                                                            try
+                                                            {
+                                                                Actions actions = new Actions((IWebDriver)this.driver);
+                                                                IWebElement combodown = this.driver.FindElement(By.CssSelector("button[class*='components-button edit-post-post-schedule__toggle is-tertiary']"));
+                                                                actions.MoveToElement(combodown).Click().Perform();
+                                                                Thread.Sleep(1000);
+                                                                break;
+                                                            }
+                                                            catch { }
+                                                        }
+
+                                                        this.Invoke((Action)(() => now = regdate.AddHours(6 * (index5 + 1))));
+                                                        string year = now.ToString("yyyy");
+                                                        string mont = now.ToString("MM");
+                                                        string day = now.ToString("dd");
+                                                        string Hhch = now.ToString("tt");
+
+                                                        //발행 년도
+                                                        while (true)
+                                                        {
+                                                            try
+                                                            {
+                                                                Actions actions = new Actions((IWebDriver)this.driver);
+                                                                IWebElement yy = this.driver.FindElement(By.CssSelector("div[class*='components-datetime__time-field-year']"));
+                                                                actions.MoveToElement(yy).Click().Perform();
+                                                                //yy.Clear();
+                                                                Thread.Sleep(1000);
+                                                                SendKeys.SendWait("^{a}");
+                                                                Thread.Sleep(100);
+                                                                SendKeys.SendWait("{DEL}");
+                                                                Thread.Sleep(100);
+                                                                Clipboard.SetText(year);
+                                                                SendKeys.SendWait("^{v}");
+                                                                Thread.Sleep(100);
+                                                                break;
+                                                            }
+                                                            catch { }
+                                                        }
+
+                                                        //발행 월
+                                                        while (true)
+                                                        {
+                                                            try
+                                                            {
+                                                                Actions actions = new Actions((IWebDriver)this.driver);
+                                                                IWebElement Mth = this.driver.FindElement(By.CssSelector("div[class*='components-datetime__time-field-month']"));
+                                                                actions.MoveToElement(Mth).Click().Perform();
+                                                                var opt = 0;
+                                                                int op = 0;
+                                                                try
+                                                                {
+                                                                    opt = this.driver.FindElements(By.XPath("/html/body/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/div/div[2]/div/div/div/div[2]/div[1]/fieldset[2]/div/div[1]/div/div/div/div/select/option")).Count();
+                                                                }
+                                                                catch { }
+                                                                try
+                                                                {
+                                                                    if (opt == 0)
+                                                                    {
+                                                                        opt = this.driver.FindElements(By.XPath("/html/body/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/div/div[2]/div/div/div/div[2]/div[1]/fieldset[2]/div/div[2]/div/div/div/div/select/option")).Count();
+                                                                        op = 1;
+                                                                    }
+                                                                }
+                                                                catch { }
+                                                                ////*[@id="inspector-select-control-11"]/option[1]
+                                                                for (int idx1 = 1; idx1 <= opt; idx1++)
+                                                                {
+                                                                    try
+                                                                    {
+                                                                        var mmele = "";
+                                                                        if (op == 0)
+                                                                        {
+                                                                            mmele = this.driver.FindElement(By.XPath("/html/body/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/div/div[2]/div/div/div/div[2]/div[1]/fieldset[2]/div/div[1]/div/div/div/div/select/option[" + idx1 + "]")).Text;
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            mmele = this.driver.FindElement(By.XPath("/html/body/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/div/div[2]/div/div/div/div[2]/div[1]/fieldset[2]/div/div[2]/div/div/div/div/select/option[" + idx1 + "]")).Text;
+                                                                        }
+                                                                        //
+                                                                        if (mont.Substring(0, 1) == "0")
+                                                                        {
+                                                                            this.Invoke((Action)(() => mont = mont.Replace("0", "")));
+                                                                        }
+                                                                        var mmont = mont + "월";
+                                                                        if (mmele == mmont)
+                                                                        {
+                                                                            Actions act = new Actions((IWebDriver)this.driver);
+                                                                            IWebElement mt = null;
+                                                                            if (op == 0)
+                                                                            {
+                                                                                 mt = this.driver.FindElement(By.XPath("/html/body/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/div/div[2]/div/div/div/div[2]/div[1]/fieldset[2]/div/div[1]/div/div/div/div/select/option[" + idx1 + "]"));
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                mt = this.driver.FindElement(By.XPath("/html/body/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/div/div[2]/div/div/div/div[2]/div[1]/fieldset[2]/div/div[2]/div/div/div/div/select/option[" + idx1 + "]"));
+                                                                            }
+                                                                            mt.Click();
+                                                                            break;
+                                                                        }
+                                                                    }
+                                                                    catch { }
+                                                                }
+                                                                Thread.Sleep(100);
+                                                                break;
+                                                            }
+                                                            catch { }
+                                                        }
+
+                                                        //발행 일
+                                                        while (true)
+                                                        {
+                                                            try
+                                                            {
+                                                                Actions actions = new Actions((IWebDriver)this.driver);
+                                                                IWebElement dd = this.driver.FindElement(By.CssSelector("div[class*='components-datetime__time-field components-datetime__time-field-day']"));
+                                                                actions.MoveToElement(dd).Click().Perform();
+                                                                //this.Invoke((Action)(() => dd.Clear()));
+                                                                SendKeys.SendWait("^{a}");
+                                                                Thread.Sleep(100);
+                                                                SendKeys.SendWait("{DEL}");
+                                                                Thread.Sleep(100);
+                                                                Clipboard.SetText(day);
+                                                                SendKeys.SendWait("^{v}");
+                                                                Thread.Sleep(100);
+                                                                break;
+                                                            }
+                                                            catch { }
+                                                        }
+
+                                                        //발행 시간
+                                                        while (true)
+                                                        {
+                                                            try
+                                                            {
+                                                                Actions actions = new Actions((IWebDriver)this.driver);
+                                                                IWebElement hour = this.driver.FindElement(By.CssSelector("div[class*='components-datetime__time-field-hours-input']"));
+                                                                actions.MoveToElement(hour).Click().Perform();
+                                                                SendKeys.SendWait("^{a}");
+                                                                Thread.Sleep(100);
+                                                                SendKeys.SendWait("{DEL}");
+                                                                Thread.Sleep(100);
+                                                                Clipboard.SetText(now.ToString("hh"));
+                                                                SendKeys.SendWait("^{v}");
+                                                                Thread.Sleep(100);
+                                                                break;
+                                                            }
+                                                            catch { }
+                                                        }
+
+                                                        //발행 분
+                                                        while (true)
+                                                        {
+                                                            try
+                                                            {
+                                                                Actions actions = new Actions((IWebDriver)this.driver);
+                                                                IWebElement sec = this.driver.FindElement(By.CssSelector("div[class*='components-datetime__time-field-minutes-input']"));
+                                                                actions.MoveToElement(sec).Click().Perform();
+                                                                SendKeys.SendWait("^{a}");
+                                                                Thread.Sleep(100);
+                                                                SendKeys.SendWait("{DEL}");
+                                                                Thread.Sleep(100);
+                                                                Clipboard.SetText(now.ToString("mm"));
+                                                                SendKeys.SendWait("^{v}");
+                                                                Thread.Sleep(100);
+                                                                break;
+                                                            }
+                                                            catch { }
+                                                        }
+
+                                                        //발행 오전/오후
+                                                        while (true)
+                                                        {
+                                                            if (Hhch == "오전")
+                                                            {
+                                                                try
+                                                                {
+                                                                    Actions actions = new Actions((IWebDriver)this.driver);
+                                                                    IWebElement tt = this.driver.FindElement(By.CssSelector("button[class*='components-datetime__time-am-button is-secondary']"));
+                                                                    actions.MoveToElement(tt).Click().Perform();
+                                                                    Thread.Sleep(100);
+                                                                    break;
+                                                                }
+                                                                catch { }
+                                                            }
+                                                            else
+                                                            {
+                                                                try
+                                                                {
+                                                                    Actions actions = new Actions((IWebDriver)this.driver);
+                                                                    IWebElement tt = this.driver.FindElement(By.CssSelector("button[class*='components-datetime__time-pm-button is-primary']"));
+                                                                    actions.MoveToElement(tt).Click().Perform();
+                                                                    Thread.Sleep(100);
+                                                                    break;
+                                                                }
+                                                                catch { }
+                                                            }
+                                                        }
+
+                                                        while (true)
+                                                        {
+                                                            try
+                                                            {
+                                                                Actions actions = new Actions((IWebDriver)this.driver);
+                                                                IWebElement summit = this.driver.FindElement(By.CssSelector("button[class*='components-button editor-post-publish-panel__toggle editor-post-publish-button__button is-primary']"));
+                                                                actions.MoveToElement(summit).Click().Perform();
+                                                                Thread.Sleep(1000);
+                                                                break;
+                                                            }
+                                                            catch { }
+                                                        }
+
+                                                        while (true)
+                                                        {
+                                                            try
+                                                            {
+                                                                Actions actions = new Actions((IWebDriver)this.driver);
+                                                                IWebElement resummit = this.driver.FindElement(By.CssSelector("button[class*='components-button editor-post-publish-button editor-post-publish-button__button is-primary']"));
+                                                                actions.MoveToElement(resummit).Click().Perform();
+                                                                Thread.Sleep(3000);
+                                                                flags = true;
+                                                                break;
+                                                            }
+                                                            catch { }
+                                                        }
+
+                                                        if (!flags)
+                                                        {
+                                                            this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss ") + (index5 + 1) + "번째 글 작성 실패")));
+                                                            this.Invoke((Action)(() => this.File_info(this.listBox3.Items[0].ToString())));
+                                                            this.Invoke((Action)(() => this.DataListDelete2(listBox2, index5)));
+                                                            this.Invoke((Action)(() => Thread.Sleep(Delay * 1000)));
+                                                        }
+                                                        else
+                                                        {
+                                                            this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss ") + (index5 + 1) + "번째 글 작성 성공")));
+                                                            this.Invoke((Action)(() => this.File_info(this.listBox3.Items[0].ToString())));
+                                                            index5++;
+                                                            this.Invoke((Action)(() => Thread.Sleep(Delay * 1000)));
+                                                        }
+
                                                     }
                                                 }
-
-                                                while (true)
-                                                {
-                                                    try
-                                                    {
-                                                        Actions actions = new Actions((IWebDriver)this.driver);
-                                                        IWebElement summit = this.driver.FindElement(By.CssSelector("button[class*='components-button editor-post-publish-panel__toggle editor-post-publish-button__button is-primary']"));
-                                                        actions.MoveToElement(summit).Click().Perform();
-                                                        Thread.Sleep(1000);
-                                                        break;
-                                                    }
-                                                    catch { }
-                                                }
-
-                                                while (true)
-                                                {
-                                                    try
-                                                    {
-                                                        Actions actions = new Actions((IWebDriver)this.driver);
-                                                        IWebElement resummit = this.driver.FindElement(By.CssSelector("button[class*='components-button editor-post-publish-button editor-post-publish-button__button is-primary']"));
-                                                        actions.MoveToElement(resummit).Click().Perform();
-                                                        Thread.Sleep(3000);
-                                                        flags = true;
-                                                        break;
-                                                    }
-                                                    catch { }
-                                                }
-
-                                                if (!flags)
-                                                {
-                                                    this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss ") + (index5 + 1) + "번째 글 작성 실패")));
-                                                    this.File_info(this.listBox3.Items[0].ToString());
-                                                    DataListDelete2(listBox2, index5);
-                                                    Thread.Sleep(Convert.ToInt32(numericUpDown3.Value) * 1000);
-                                                }
-                                                else
-                                                {
-                                                    this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss ") + (index5 + 1) + "번째 글 작성 성공")));
-                                                    this.File_info(this.listBox3.Items[0].ToString());
-                                                    index5++;
-                                                    Thread.Sleep(Convert.ToInt32(numericUpDown3.Value) * 1000);
-                                                }
-                                                
+                                                catch { }
                                             }
                                         }
-                                        catch { }
                                     }
                                 }
-                            }                            
+                                catch { }
+
+                                this.Invoke((Action)(() => this.DataListDelete2(listBox1, index3)));
+                                this.Invoke((Action)(() => Thread.Sleep(Delay * 1000)));
+                                //this.Invoke((Action)(() => this.driver.Close()));
+                                if (listBox1.Items.Count == index3)
+                                {
+                                    break;                                    
+                                }
+                            }
+                            //flags = true;
+
                         }
                         catch { }
-                        DataListDelete2(listBox1, index3);
-                        Thread.Sleep(Convert.ToInt32(numericUpDown3.Value) * 1000);
+
+                        //if (!flags)
+                        //{
+                        //    this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") + " 검색 가능한 링크가 없습니다.")));
+                        //    this.Invoke((Action)(() => this.File_info(this.listBox3.Items[0].ToString())));
+                        //    this.Invoke((Action)(() => this.DoStop()));
+                        //    this.Invoke((Action)(() => Thread.Sleep(1000)));
+                        //    this.Invoke((Action)(() => this.driver.Quit()));
+                        //}
+                        //else
+                        //{
+
+                        //}
                     }
-                    flags = true;
                 }
-                catch { flags = false; }
-                
-                if (!flags)
-                {
-                    this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") + " 검색 가능한 링크가 없습니다.")));
-                    this.File_info(this.listBox3.Items[0].ToString());
-                    this.DoStop();
-                    Thread.Sleep(1000);
-                    this.driver.Quit();
-                }
-                else
-                {
-                    
-                }
-                
-                this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") + " 모든 글 작성 완료")));
-                this.File_info(this.listBox3.Items[0].ToString());
-                File_save_list(listBox2);
-                this.driver.Quit();
-                this.DoStop();
+                catch { }
+                this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") +  " " + link.Replace("http://", "").Replace("/","")  +" 글 발행 완료.")));
+                this.Invoke((Action)(() => this.File_info(this.listBox3.Items[0].ToString())));
+                this.Invoke((Action)(() => this.DataListDelete(dataGridView1)));
+                this.Invoke((Action)(() => this.driver.Close()));
             }
+
+            this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") + " 모든 글 작성 완료")));
+            this.Invoke((Action)(() => this.File_info(this.listBox3.Items[0].ToString())));
+            this.Invoke((Action)(() => this.File_save_list(listBox2)));
+            this.Invoke((Action)(() => this.driver.Quit()));
+            //this.Invoke((Action)(() => this.DoStop()));
+
             this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") + " 프로그램 종료")));
-            this.File_info(this.listBox3.Items[0].ToString());
+            this.Invoke((Action)(() => this.File_info(this.listBox3.Items[0].ToString())));
         }
 
         private void DoStop()
@@ -1020,7 +1220,7 @@ namespace WP_AutoPost
                         string svdata = lst.Items[index10].ToString();
 
                         streamWriter.Write(svdata + "\r\n");
-                        streamWriter.Flush();                        
+                        streamWriter.Flush();
                     }
                     streamWriter.Close();
                 }
@@ -1033,7 +1233,7 @@ namespace WP_AutoPost
             return true;
         }
 
-        public bool File_save(string strMsg, string filename)
+        public bool File_save(string strMsg, string id, string filename)
         {
             try
             {
@@ -1041,12 +1241,12 @@ namespace WP_AutoPost
                 string strFilename = "";
                 string strLocal = Application.ExecutablePath.Substring(0, Application.ExecutablePath.LastIndexOf("\\"));
 
-                strChkFolder = Application.StartupPath + "\\script\\" + now.ToString("yyyyMMdd");
+                strChkFolder = Application.StartupPath + "\\script\\" + id + "\\" + now.ToString("yyyyMMdd");
                 if (!System.IO.Directory.Exists(strChkFolder))
                 {
                     System.IO.Directory.CreateDirectory(strChkFolder);
                 }
-                
+
                 if (filename.IndexOf("title") > -1)
                 {
                     if (!System.IO.Directory.Exists(strChkFolder + "\\title"))
@@ -1063,7 +1263,7 @@ namespace WP_AutoPost
                 }
                 else
                 {
-                    if (!System.IO.Directory.Exists(strChkFolder + "\\body"))                    {
+                    if (!System.IO.Directory.Exists(strChkFolder + "\\body")) {
                         System.IO.Directory.CreateDirectory(strChkFolder + "\\body");
                         strChkFolder = strChkFolder + "\\body";
                         strFilename = strChkFolder + "\\" + filename + ".txt";
@@ -1096,7 +1296,7 @@ namespace WP_AutoPost
                 this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss") + " 원고 저장 폴더를 찾을 수 없습니다.")));
                 this.File_info(this.listBox3.Items[0].ToString());
                 return;
-            }           
+            }
 
             String FolderName = Application.StartupPath + "\\script\\" + DateTime.Now.ToString("yyyyMMdd") + "\\body";
             System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(FolderName);
@@ -1113,207 +1313,243 @@ namespace WP_AutoPost
         }
 
         private void button4_Click(object sender, EventArgs e)
-        {
-            //this.textbody.Multiline = true;
-
-            //string kurl = "https://s.search.naver.com/p/blog/search.naver?where=blog&sm=tab_pge&api_type=1&query=대출";
-            //Thread.Sleep(1000);
-
-            //HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-            //using (WebClient client = new WebClient())
-            //{
-            //    client.Encoding = Encoding.UTF8;
-            //    string source = client.DownloadString(kurl);
-            //    doc.LoadHtml(source);
-            //}
-
-            //string[] result = doc.ParsedText.Split(new string[] { "sp_blog" }, StringSplitOptions.None);
-            //Thread.Sleep(100);
-
-            //string burl = indexParse(result[1], "data-url=\\\"", "\\\" aria-pressed");
-            //Thread.Sleep(100);
-
-            //HtmlAgilityPack.HtmlDocument doc2 = new HtmlAgilityPack.HtmlDocument();
-            //using (WebClient client2 = new WebClient())
-            //{
-            //    client2.Encoding = Encoding.UTF8;
-            //    string ssource = client2.DownloadString(burl);
-            //    doc2.LoadHtml(ssource);
-            //}
-            //HtmlAgilityPack.HtmlNodeCollection ifnode = doc2.DocumentNode.SelectNodes("//iframe[@src]");
-            //string postview = string.Empty;
-            //foreach (var node in ifnode)
-            //{
-            //    HtmlAgilityPack.HtmlAttribute attr = node.Attributes["src"];
-            //    postview = attr.Value;
-            //}
-
-            //string vurl = "https://blog.naver.com" + postview;
-            //HtmlAgilityPack.HtmlDocument doc3 = new HtmlAgilityPack.HtmlDocument();
-            //using (WebClient client3 = new WebClient())
-            //{
-            //    client3.Encoding = Encoding.UTF8;
-            //    string ssource = client3.DownloadString(vurl);
-            //    doc3.LoadHtml(ssource);
-            //}
-
-            //HtmlAgilityPack.HtmlNode setitle = doc3.DocumentNode.SelectSingleNode("//div[@class='se-module se-module-text se-title-text']");
-            //HtmlAgilityPack.HtmlNodeCollection setext = doc3.DocumentNode.SelectNodes("//div[@class='se-component se-text se-l-default']");
-
-            //string title = setitle.InnerText.Replace("\n", "").Trim();
-            //this.texttitle.Text = title;
-
-            //foreach (var tex in setext)
-            //{
-            //    try
-            //    {
-            //        string bodytx = tex.InnerText;
-            //        string bodytxx = bodytx.Replace("\n", "").Trim();
-
-            //        if (bodytxx != "")
-            //        {
-            //            this.textbody.Text = this.textbody.Text + bodytxx + Environment.NewLine;                        
-            //        }
-            //        Thread.Sleep(100);
-            //    }
-            //    catch { continue; }
-            //}
-            //int returnStr = int.Parse(cntStr.Matches(textbody.Text, 0).Count.ToString());
-            //int textLentgh = textbody.Text.Trim().Length - returnStr;
-            //if (textLentgh > 1500)
-            //{
-            //    string[] filenm = burl.Split(new char[] { '/' }, StringSplitOptions.None);
-            //    string fnm = filenm[3] + "-" + filenm[4];
-            //    fnm = burl.Replace("https://", "").Replace("/", ".");
-            //    File_save(texttitle.Text.Trim(), fnm);
-            //    File_save(textbody.Text.Trim(), fnm);
-            //}
-            using (StreamReader sr = new StreamReader("D:\\script\\" + "blog.naver.com.onyang4u.222855919880.txt", Encoding.UTF8))
-            {
-                while (!sr.EndOfStream)
-                {
-                    try
-                    {
-                        string line = sr.ReadLine();
-                        if (line != " ")
-                        {
-                            textbody.Text = textbody.Text + line + Environment.NewLine;
-                        }
-                    }
-                    catch { continue; }
-                }
-                sr.Close();
-            }
-
-            if (textbody.Text.IndexOf(".") > -1)
-            {
-                textbody.Text = textbody.Text.Replace(".", "\n");
-            }
-
-            if (textbody.Text.IndexOf("니다.") > -1 | textbody.Text.IndexOf("니다") > -1)
-            {
-                textbody.Text = textbody.Text.Replace("니다", "니다.\n");
-            }
-            
-            if (textbody.Text.IndexOf("데요.") > -1 | textbody.Text.IndexOf("데요") > -1)
-            {
-                textbody.Text = textbody.Text.Replace("데요", "데요.\n");
-            }
-            
-            if (textbody.Text.IndexOf("어요.") > -1 | textbody.Text.IndexOf("어요") > -1)
-            {
-                textbody.Text = textbody.Text.Replace("어요", "어요.\n");
-            }
-            
-            if (textbody.Text.IndexOf("해요.") > -1 | textbody.Text.IndexOf("해요") > -1)
-            {
-                textbody.Text = textbody.Text.Replace("해요", "해요.\n");
-            }
-            if (textbody.Text.IndexOf("했죠.") > -1 | textbody.Text.IndexOf("했죠") > -1)
-            {
-                textbody.Text = textbody.Text.Replace("했죠", "했죠.\n");
-            }
-
-            textbody.Text = textbody.Text.Replace(".", "");
+        {            
+            string result = Translate("​​오랜만에 올영 추천템. 필요템한번 쓸어보자고~~​오빠가 해주는 갈비찜못 참 치 🫶​밥 한공기 뚝딱!​ ​밥 먹고 안양천 산책길~~​춤 리더 선생님이 여러 수강생과 댄싱파티를펼치는 모습 발견~~!​오빠랑 나도 자연스럽게 껴봤다.​ ​다욧뜨 성공중인 박대리와 모닝 코히​재쓰도 태꾸도 없는 날심심치 않은 위로가 되는구료요. ​ ​오랜만에 태태랑 도산 나들이​도산 원픽 카페 꽁티드툴레아여긴 진짜 원픽이야 ​조만간 다시와야지. ​ ​맛있어 보여서 선택한 초코무스​부드러운데 엄청 달았다아아랑 먹기 딱​ ​그리고 까눌레​반 잘라서 주시는데겉바속쫀​ ​예쁜데 모기가 많은건 함정~~~​쉐어테이블자리라 약간 옆사람 얘기가잘들린게 함정이었지만​태태랑 깊은듯 안깊은듯한 대화를 나누며일차를 시좍~~~ ​​예약시간에 맞춰 도착한 도슬박​양이 많지않지만분위기랑 예쁨으로 한도초과​ ​술이 아쉽지만 다음에 온다면 처음부터 증류주로 가는걸로~~~​옛날에 홍대 닭발집 가던 우리였는데 좋다좋아~~~~​ ​집가는길 진짜 길에 감이 떨어져있다. ​오빠가 아침에 감떨어지면저녁에 누구 다 치워논다고 했는데​오오​ ​연속 3주 캠핑 도전~~~~​이번주는 날씨가 왜이렇게 좋은지햇빛도 적당하고 바람도 좋고~​발꾸락이 따봉춤을 춘다 따붕​ ​떨어진 낙엽이 더 더 가을을 느끼게 해~~ 점심 조금지나 감바스로 스타트!!​옛날에 비해 매콤한 맛이 사라져 아쉽지만새우는 오동통통​ ​리미티드 에디션 제로콜라도 데려왔지~~​ ​이날의 온도 습도점심​완벽쓰 ​끝이 아니오라감바스에는 자고로 면이 들어가서알리오올리오를 먹어야 함니다​꿀꿀​ ​자리만 비우면  찾아오는 낙엽손님ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ​ ​뚝딱 한가지로 두메뉴~~~​ ​아무리 캠핑이 먹고 쉬는거라지만날씨가 좋은날은 산책 못참치~~~​들어오기전 댐뷰 산책로가 너무 예뻐서한바퀴 돌아봤다​ ​오리가 갑자기 착지해서 물고기 잡아먹던거신기방기 ​나무 가득 예쁜 배경으로 사진도 찍어보려했지만그냥 오빠랑 나로 꽉 채어진 화면 ㅋㅋㅋㅋㅋ​여백의 미는 없닷!!​  캠핑장에 인기있는 그네라길래 왔는데 ​오빠가춘향이 처럼 그네를 타보랬지만, ​난 그런거 몰라~~~​난 춘향이가 아니거든 ㅋㅋㅋㅋㅋㅋ​구냥~~~~​ ​구냥~~~​나 싱나~~~~~~~~~​ ​산책하고 낮잠 잠깐 자다보니저녁 먹을시간 뉘엇뉘엇​ ​육사시미 참나물무침 막걸리이조합 전 찬성이요~~~~​ ​그리고 중간에 삼겹살 사진먹느라 없구요~ 마지막 오뎅탕 크​청양고추 팍팍 넣어서 시원 칼칼한 국물로마무리~~~​ ​너무 짧은 가을속에서왠지 곧 겨울로 넘어가려는 느낌​이렇게 날씨좋은것도 이번주가 마지막이겠구나.​ ​씻고 꿀잠 예약 오빠의 깨알 안녕안넝~~~​ ​어제보다 더 빨갛게 물든것같은 낙엽 ​바람이 불더니 나무에서 후두두둑 떨어졌다​ ​아침은 튀김우동 계란 탁 풀어서해장​ ​저녁은 엄빠 동생이랑 오빠랑맛난것먹고 노래하는 분수로 주말마무리 ​​일기를 기간에 꼭 쓰려니까 촉박하고 귀찮기두하공~~~오쨋든");
+            MessageBox.Show("결과 : " + result);
+            result = indexParse(result, "\"translatedText\":\"", "\",\"engineType");
             Thread.Sleep(100);
+            result = result.Replace(":", "\r\n");
+            Thread.Sleep(100);
+
         }
 
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (textBox1.TextLength > 0 & e.KeyCode == System.Windows.Forms.Keys.Enter)
-            {
-                Properties.Settings.Default.id = textBox1.Text;
-                Properties.Settings.Default.Save();
-            }
+            //if (textBox1.TextLength > 0 & e.KeyCode == System.Windows.Forms.Keys.Enter)
+            //{
+            //    Properties.Settings.Default.id = textBox1.Text;
+            //    Properties.Settings.Default.Save();
+            //}
         }
 
         private void textBox2_KeyDown(object sender, KeyEventArgs e)
         {
-            if (textBox2.TextLength > 0 & e.KeyCode == System.Windows.Forms.Keys.Enter)
-            {
-                Properties.Settings.Default.pw = textBox2.Text;
-                Properties.Settings.Default.Save();
-            }
+            //if (textBox2.TextLength > 0 & e.KeyCode == System.Windows.Forms.Keys.Enter)
+            //{
+            //    Properties.Settings.Default.pw = textBox2.Text;
+            //    Properties.Settings.Default.Save();
+            //}
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
-            Properties.Settings.Default.bcnt = numericUpDown1.Value;
-            Properties.Settings.Default.Save();
+            //Properties.Settings.Default.bcnt = numericUpDown1.Value;
+            //Properties.Settings.Default.Save();
         }
 
         private void numericUpDown2_ValueChanged(object sender, EventArgs e)
         {
-            Properties.Settings.Default.sec = numericUpDown2.Value;
-            Properties.Settings.Default.Save();
+            //Properties.Settings.Default.sec = numericUpDown2.Value;
+            //Properties.Settings.Default.Save();
         }
 
         private void textBox3_KeyDown(object sender, KeyEventArgs e)
         {
-            if (textBox3.TextLength > 0 & e.KeyCode == System.Windows.Forms.Keys.Enter)
-            {
-                Properties.Settings.Default.tconn = textBox3.Text;
-                Properties.Settings.Default.Save();
-            }
+            //if (textBox3.TextLength > 0 & e.KeyCode == System.Windows.Forms.Keys.Enter)
+            //{
+            //    Properties.Settings.Default.tconn = textBox3.Text;
+            //    Properties.Settings.Default.Save();
+            //}
         }
 
         private void textBox4_KeyDown(object sender, KeyEventArgs e)
         {
-            if (textBox4.TextLength > 0 & e.KeyCode == System.Windows.Forms.Keys.Enter)
-            {
-                Properties.Settings.Default.wconn = textBox4.Text;
-                Properties.Settings.Default.Save();
-            }
+            //if (textBox4.TextLength > 0 & e.KeyCode == System.Windows.Forms.Keys.Enter)
+            //{
+            //    Properties.Settings.Default.wconn = textBox4.Text;
+            //    Properties.Settings.Default.Save();
+            //}
         }
 
         private void textBox5_KeyDown(object sender, KeyEventArgs e)
         {
-            if (textBox5.TextLength > 0 & e.KeyCode == System.Windows.Forms.Keys.Enter)
-            {
-                Properties.Settings.Default.tpost = textBox5.Text;
-                Properties.Settings.Default.Save();
-            }
-        }
 
-        private void textBox6_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (textBox6.TextLength > 0 & e.KeyCode == System.Windows.Forms.Keys.Enter)
-            {
-                Properties.Settings.Default.wpost = textBox6.Text;
-                Properties.Settings.Default.Save();
-            }
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-            Properties.Settings.Default.date = dateTimePicker1.Value;
-            Properties.Settings.Default.Save();
+            //Properties.Settings.Default.date = dateTimePicker1.Value;
+            //Properties.Settings.Default.Save();
         }
 
         private void numericUpDown3_ValueChanged(object sender, EventArgs e)
         {
-            Properties.Settings.Default.delay = numericUpDown3.Value;
-            Properties.Settings.Default.Save();
+            //Properties.Settings.Default.delay = numericUpDown3.Value;
+            //Properties.Settings.Default.Save();
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            StringFormat drawFormat = new StringFormat();
+            drawFormat.FormatFlags = StringFormatFlags.DirectionRightToLeft;
+            using (Brush brush = new SolidBrush(Color.Red))
+            {
+                e.Graphics.DrawString((e.RowIndex + 1).ToString(), e.InheritedRowStyle.Font
+                    , brush, e.RowBounds.Location.X + 35, e.RowBounds.Location.Y + 4, drawFormat);
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked == true)
+            {
+                if (textBox1.Text != "" & textBox1.TextLength > 1 & textBox2.Text != "" & textBox2.TextLength > 1
+                    & textBox3.Text != "" & textBox3.TextLength > 1 & textBox5.Text != "" & textBox5.TextLength > 1)
+                {
+                    int cnt = this.dataGridView1.RowCount;
+                    Invoke((Action)(() => this.dataGridView1.Rows.Add()));
+                    Invoke((Action)(() => this.dataGridView1[1, cnt].Value = textBox1.Text));
+                    Invoke((Action)(() => this.dataGridView1[2, cnt].Value = textBox2.Text));
+                    Invoke((Action)(() => this.dataGridView1[3, cnt].Value = textBox5.Text));
+                    Invoke((Action)(() => this.dataGridView1[4, cnt].Value = "티스토리"));
+                    Invoke((Action)(() => this.dataGridView1[5, cnt].Value = numericUpDown1.Value));
+                    Invoke((Action)(() => this.dataGridView1[6, cnt].Value = textBox3.Text));
+                    Invoke((Action)(() => this.dataGridView1[7, cnt].Value = numericUpDown2.Value));
+                    Invoke((Action)(() => this.dataGridView1[8, cnt].Value = dateTimePicker1.Value));
+                    Invoke((Action)(() => this.dataGridView1[9, cnt].Value = numericUpDown3.Value));
+                    Invoke((Action)(() => this.dataGridView1.Update()));
+                }
+                TextInit();
+            }
+            else if (radioButton2.Checked == true)
+            {
+                if (textBox1.Text != "" & textBox1.TextLength > 1 & textBox2.Text != "" & textBox2.TextLength > 1
+                    & textBox4.Text != "" & textBox4.TextLength > 1 & textBox5.Text != "" & textBox5.TextLength > 1)
+                {
+                    int cnt = this.dataGridView1.RowCount;
+                    Invoke((Action)(() => this.dataGridView1.Rows.Add()));
+                    Invoke((Action)(() => this.dataGridView1[1, cnt].Value = textBox1.Text));
+                    Invoke((Action)(() => this.dataGridView1[2, cnt].Value = textBox2.Text));
+                    Invoke((Action)(() => this.dataGridView1[3, cnt].Value = textBox5.Text));
+                    Invoke((Action)(() => this.dataGridView1[4, cnt].Value = "워드프레스"));
+                    Invoke((Action)(() => this.dataGridView1[5, cnt].Value = numericUpDown1.Value));
+                    Invoke((Action)(() => this.dataGridView1[6, cnt].Value = textBox4.Text));
+                    Invoke((Action)(() => this.dataGridView1[7, cnt].Value = numericUpDown2.Value));
+                    Invoke((Action)(() => this.dataGridView1[8, cnt].Value = dateTimePicker1.Value));
+                    Invoke((Action)(() => this.dataGridView1[9, cnt].Value = numericUpDown3.Value));
+                    Invoke((Action)(() => this.dataGridView1.Update()));
+                }
+                TextInit();
+            }
+        }
+
+        private void TextInit()
+        {
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox3.Text = "";
+            textBox4.Text = "";
+            textBox5.Text = "";
+            numericUpDown1.Value = 1;
+            numericUpDown2.Value = 500;
+            numericUpDown3.Value = 1;            
+        }
+
+        private void dataGridView1_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentCell is DataGridViewCheckBoxCell)
+            {
+                dataGridView1.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            for (int index1 = 0; index1 < dataGridView1.RowCount; index1++)
+            {
+                try
+                {
+                    if (this.dataGridView1[0, index1].Value == "true")
+                    {
+                        Invoke((Action)(() => this.dataGridView1.Rows.RemoveAt(index1)));
+                        Invoke((Action)(() => this.dataGridView1.Update()));
+                    }
+                }
+                catch { }
+            }
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            if (dataGridView1.RowCount < 1)
+            {
+                MessageBox.Show("검색 가능한 정보가 없습니다.");
+                return;
+            }
+
+            this.DoThread();
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") + " 프로그램 중지중")));
+            this.DoStop();
+            Thread.Sleep(3000);
+            this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") + " 프로그램 중지되었습니다.")));
+        }
+
+        public string Translate(string TextBody)
+        {
+            try
+            {
+                string url = "https://openapi.naver.com/v1/papago/n2mt";
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                request.Headers.Add("X-Naver-Client-Id", "CW911KiVEpGj6D60KwB5");
+                request.Headers.Add("X-Naver-Client-Secret", "WFSFjkQRUI");
+                request.Method = "POST";
+                string query = TextBody;
+                byte[] byteDataParams = Encoding.UTF8.GetBytes("source=ko&target=en&text=" + query);
+                request.ContentType = "application/x-www-form-urlencoded";
+                request.ContentLength = byteDataParams.Length;
+                Stream st = request.GetRequestStream();
+                st.Write(byteDataParams, 0, byteDataParams.Length);
+                st.Close();
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                Stream stream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(stream, Encoding.UTF8);
+                string text = reader.ReadToEnd();
+                stream.Close();
+                response.Close();
+                reader.Close();
+                return text;
+            }
+            catch { return null; }
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            try
+            {
+                foreach (Process process in ((IEnumerable<Process>)Process.GetProcesses()).Where<Process>((Func<Process, bool>)(pr => pr.ProcessName == "chrome")))
+                    process.Kill();
+            }
+            catch { }
+            try
+            {
+                foreach (Process process in ((IEnumerable<Process>)Process.GetProcesses()).Where<Process>((Func<Process, bool>)(pr => pr.ProcessName == "chromedriver")))
+                    process.Kill();
+            }
+            catch { }
         }
     }
 }
