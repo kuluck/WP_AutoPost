@@ -58,6 +58,8 @@ namespace WP_AutoPost
         private void Mouse_Wheel_Sroll_Down(int bb) => new InputSimulator().Mouse.VerticalScroll(bb);
         private void Mouse_Wheel_Sroll_Up(int dd) => new InputSimulator().Mouse.VerticalScroll(dd);
 
+        public string postdata;
+
         private void Form1_Load(object sender, EventArgs e)
         {
             //radioButton1.Checked = true;
@@ -70,6 +72,7 @@ namespace WP_AutoPost
             //    dateTimePicker1.Visible = false;
             //}
             Init();
+            LoadSetting();
             this.Invoke((Action)(() => this.listBox3.Items.Insert(0, DateTime.Now.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") + " 프로그램 시작 설정 중")));
             ChUpdate();
             StartPosition = FormStartPosition.Manual;
@@ -111,6 +114,8 @@ namespace WP_AutoPost
             //numericUpDown2.Value = Properties.Settings.Default.sec;
             //dateTimePicker1.Value = Properties.Settings.Default.date;
             //numericUpDown3.Value = Properties.Settings.Default.delay;
+            if (!System.IO.File.Exists(Application.StartupPath + "\\WPautopost.ini"))
+                System.IO.File.Create(Application.StartupPath + "\\WPautopost.ini");
             switch (Properties.Settings.Default.radio)
             {
                 case "1":
@@ -121,6 +126,22 @@ namespace WP_AutoPost
                     break;
             }
         }
+
+        public void LoadSetting()
+        {
+            if (!System.IO.File.Exists(Application.StartupPath + "\\WPautopost.ini"))
+                return;
+            using (StreamReader streamReader = new StreamReader(Application.StartupPath + "\\WPautopost.ini"))
+            {
+                this.postdata = streamReader.ReadLine();                
+            }
+
+            try
+            {
+                DataGridInsert(postdata,dataGridView1);
+            }
+            catch (Exception e) { MessageBox.Show("왜" + e); }
+        }        
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
@@ -192,9 +213,11 @@ namespace WP_AutoPost
                                 string[] dt = line.Split(new char[] { ',' });
 
                                 this.Invoke((Action)(() => dgv.Rows.Add()));
-                                for (int co = 0; co < col; co++)
+                                for (int co = 1; co < col; co++)
                                 {
-                                    this.Invoke((Action)(() => dgv[co, dgv.Rows.Count - 2].Value = dt[co].Trim()));
+                                    
+                                    this.Invoke((Action)(() => dgv[co, dgv.Rows.Count - 1].Value = dt[co-1].Trim()));
+                                    
                                 }
                                 this.Invoke((Action)(() => dgv.Update()));
 
@@ -203,7 +226,7 @@ namespace WP_AutoPost
                             {
                                 string dt = line;
                                 this.Invoke((Action)(() => dgv.Rows.Add()));
-                                this.Invoke((Action)(() => dgv[col - 1, dgv.Rows.Count - 2].Value = dt.Trim()));
+                                this.Invoke((Action)(() => dgv[col - 1, dgv.Rows.Count].Value = dt.Trim()));
                                 this.Invoke((Action)(() => dgv.Update()));
                             }
                         }
@@ -523,6 +546,7 @@ namespace WP_AutoPost
                             while (index3 != listBox1.Items.Count)
                             {
                                 string linkurl = listBox1.Items[index3].ToString();
+                                this.Invoke((Action)(() => regdate = Convert.ToDateTime(dataGridView1[8, index1].Value.ToString())));
                                 //this.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
                                 //this.driver.Navigate().GoToUrl();
                                 //Thread.Sleep(Delay * 1000);

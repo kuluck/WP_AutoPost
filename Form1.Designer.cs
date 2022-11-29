@@ -29,15 +29,35 @@ namespace WP_AutoPost
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgv1_chk = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dgv1_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv1_pw = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv1_key = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv1_plt = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv1_subcnt = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv1_link = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv1_len = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv1_reg = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv1_delay = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.label12 = new System.Windows.Forms.Label();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.label13 = new System.Windows.Forms.Label();
@@ -62,26 +82,6 @@ namespace WP_AutoPost
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.label15 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.label12 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.dgv1_chk = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dgv1_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv1_pw = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv1_key = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv1_plt = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv1_subcnt = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv1_link = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv1_len = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv1_reg = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv1_delay = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -107,14 +107,14 @@ namespace WP_AutoPost
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgv1_chk,
@@ -129,20 +129,88 @@ namespace WP_AutoPost
             this.dgv1_delay});
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(768, 202);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CurrentCellDirtyStateChanged += new System.EventHandler(this.dataGridView1_CurrentCellDirtyStateChanged);
             this.dataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
+            // 
+            // dgv1_chk
+            // 
+            this.dgv1_chk.FalseValue = "false";
+            this.dgv1_chk.HeaderText = "";
+            this.dgv1_chk.Name = "dgv1_chk";
+            this.dgv1_chk.TrueValue = "true";
+            this.dgv1_chk.Width = 25;
+            // 
+            // dgv1_id
+            // 
+            this.dgv1_id.HeaderText = "아이디";
+            this.dgv1_id.Name = "dgv1_id";
+            this.dgv1_id.ReadOnly = true;
+            this.dgv1_id.Width = 80;
+            // 
+            // dgv1_pw
+            // 
+            this.dgv1_pw.HeaderText = "비밀번호";
+            this.dgv1_pw.Name = "dgv1_pw";
+            this.dgv1_pw.ReadOnly = true;
+            // 
+            // dgv1_key
+            // 
+            this.dgv1_key.HeaderText = "블로그 ID";
+            this.dgv1_key.Name = "dgv1_key";
+            this.dgv1_key.ReadOnly = true;
+            this.dgv1_key.Width = 150;
+            // 
+            // dgv1_plt
+            // 
+            this.dgv1_plt.HeaderText = "발행플랫폼";
+            this.dgv1_plt.Name = "dgv1_plt";
+            this.dgv1_plt.ReadOnly = true;
+            // 
+            // dgv1_subcnt
+            // 
+            this.dgv1_subcnt.HeaderText = "키워드검색량";
+            this.dgv1_subcnt.Name = "dgv1_subcnt";
+            this.dgv1_subcnt.ReadOnly = true;
+            this.dgv1_subcnt.Width = 110;
+            // 
+            // dgv1_link
+            // 
+            this.dgv1_link.HeaderText = "WP 링크";
+            this.dgv1_link.Name = "dgv1_link";
+            this.dgv1_link.ReadOnly = true;
+            // 
+            // dgv1_len
+            // 
+            this.dgv1_len.HeaderText = "원고글자수";
+            this.dgv1_len.Name = "dgv1_len";
+            this.dgv1_len.ReadOnly = true;
+            this.dgv1_len.Width = 110;
+            // 
+            // dgv1_reg
+            // 
+            this.dgv1_reg.HeaderText = "예약발행일자";
+            this.dgv1_reg.Name = "dgv1_reg";
+            this.dgv1_reg.ReadOnly = true;
+            this.dgv1_reg.Width = 200;
+            // 
+            // dgv1_delay
+            // 
+            this.dgv1_delay.HeaderText = "딜레이";
+            this.dgv1_delay.Name = "dgv1_delay";
+            this.dgv1_delay.ReadOnly = true;
+            this.dgv1_delay.Width = 70;
             // 
             // label1
             // 
@@ -214,6 +282,101 @@ namespace WP_AutoPost
             this.groupBox1.TabIndex = 16;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "포스팅 옵션";
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(65, 71);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(100, 21);
+            this.textBox5.TabIndex = 2;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.ForeColor = System.Drawing.Color.White;
+            this.label16.Location = new System.Drawing.Point(326, 49);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(17, 12);
+            this.label16.TabIndex = 48;
+            this.label16.Text = "초";
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.CustomFormat = "";
+            this.dateTimePicker1.Location = new System.Drawing.Point(472, 71);
+            this.dateTimePicker1.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(198, 21);
+            this.dateTimePicker1.TabIndex = 9;
+            this.dateTimePicker1.Value = new System.DateTime(2022, 9, 5, 0, 0, 0, 0);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.ForeColor = System.Drawing.Color.White;
+            this.label12.Location = new System.Drawing.Point(346, 75);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(81, 12);
+            this.label12.TabIndex = 47;
+            this.label12.Text = "예약일자 설정";
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(472, 44);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(198, 21);
+            this.textBox4.TabIndex = 8;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(472, 44);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(198, 21);
+            this.textBox3.TabIndex = 40;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(346, 49);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(97, 12);
+            this.label7.TabIndex = 45;
+            this.label7.Text = "로그인 접속 링크";
+            // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.button5.ForeColor = System.Drawing.Color.Black;
+            this.button5.Location = new System.Drawing.Point(674, 66);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(94, 26);
+            this.button5.TabIndex = 11;
+            this.button5.Text = "삭제";
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.button1.ForeColor = System.Drawing.Color.Black;
+            this.button1.Location = new System.Drawing.Point(674, 14);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(94, 47);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "입력";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.ForeColor = System.Drawing.Color.White;
+            this.label15.Location = new System.Drawing.Point(6, 75);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(56, 12);
+            this.label15.TabIndex = 36;
+            this.label15.Text = "블로그 ID";
             // 
             // label14
             // 
@@ -432,6 +595,7 @@ namespace WP_AutoPost
             this.button4.TabIndex = 19;
             this.button4.Text = "테스트";
             this.button4.UseVisualStyleBackColor = false;
+            this.button4.Visible = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // label2
@@ -486,169 +650,6 @@ namespace WP_AutoPost
             this.button2.Text = "시작";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click_1);
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.ForeColor = System.Drawing.Color.White;
-            this.label15.Location = new System.Drawing.Point(6, 75);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(56, 12);
-            this.label15.TabIndex = 36;
-            this.label15.Text = "블로그 ID";
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(674, 14);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(94, 47);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "입력";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // button5
-            // 
-            this.button5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.button5.ForeColor = System.Drawing.Color.Black;
-            this.button5.Location = new System.Drawing.Point(674, 66);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(94, 26);
-            this.button5.TabIndex = 11;
-            this.button5.Text = "삭제";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.CustomFormat = "";
-            this.dateTimePicker1.Location = new System.Drawing.Point(472, 71);
-            this.dateTimePicker1.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(198, 21);
-            this.dateTimePicker1.TabIndex = 9;
-            this.dateTimePicker1.Value = new System.DateTime(2022, 9, 5, 0, 0, 0, 0);
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.ForeColor = System.Drawing.Color.White;
-            this.label12.Location = new System.Drawing.Point(346, 75);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(81, 12);
-            this.label12.TabIndex = 47;
-            this.label12.Text = "예약일자 설정";
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(472, 44);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(198, 21);
-            this.textBox4.TabIndex = 8;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(472, 44);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(198, 21);
-            this.textBox3.TabIndex = 40;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(346, 49);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(97, 12);
-            this.label7.TabIndex = 45;
-            this.label7.Text = "로그인 접속 링크";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.ForeColor = System.Drawing.Color.White;
-            this.label16.Location = new System.Drawing.Point(326, 49);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(17, 12);
-            this.label16.TabIndex = 48;
-            this.label16.Text = "초";
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(65, 71);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 21);
-            this.textBox5.TabIndex = 2;
-            // 
-            // dgv1_chk
-            // 
-            this.dgv1_chk.FalseValue = "false";
-            this.dgv1_chk.HeaderText = "";
-            this.dgv1_chk.Name = "dgv1_chk";
-            this.dgv1_chk.TrueValue = "true";
-            this.dgv1_chk.Width = 25;
-            // 
-            // dgv1_id
-            // 
-            this.dgv1_id.HeaderText = "아이디";
-            this.dgv1_id.Name = "dgv1_id";
-            this.dgv1_id.ReadOnly = true;
-            this.dgv1_id.Width = 80;
-            // 
-            // dgv1_pw
-            // 
-            this.dgv1_pw.HeaderText = "비밀번호";
-            this.dgv1_pw.Name = "dgv1_pw";
-            this.dgv1_pw.ReadOnly = true;
-            // 
-            // dgv1_key
-            // 
-            this.dgv1_key.HeaderText = "블로그 ID";
-            this.dgv1_key.Name = "dgv1_key";
-            this.dgv1_key.ReadOnly = true;
-            this.dgv1_key.Width = 150;
-            // 
-            // dgv1_plt
-            // 
-            this.dgv1_plt.HeaderText = "발행플랫폼";
-            this.dgv1_plt.Name = "dgv1_plt";
-            this.dgv1_plt.ReadOnly = true;
-            // 
-            // dgv1_subcnt
-            // 
-            this.dgv1_subcnt.HeaderText = "키워드검색량";
-            this.dgv1_subcnt.Name = "dgv1_subcnt";
-            this.dgv1_subcnt.ReadOnly = true;
-            this.dgv1_subcnt.Width = 110;
-            // 
-            // dgv1_link
-            // 
-            this.dgv1_link.HeaderText = "WP 링크";
-            this.dgv1_link.Name = "dgv1_link";
-            this.dgv1_link.ReadOnly = true;
-            // 
-            // dgv1_len
-            // 
-            this.dgv1_len.HeaderText = "원고글자수";
-            this.dgv1_len.Name = "dgv1_len";
-            this.dgv1_len.ReadOnly = true;
-            this.dgv1_len.Width = 110;
-            // 
-            // dgv1_reg
-            // 
-            this.dgv1_reg.HeaderText = "예약발행일자";
-            this.dgv1_reg.Name = "dgv1_reg";
-            this.dgv1_reg.ReadOnly = true;
-            this.dgv1_reg.Width = 200;
-            // 
-            // dgv1_delay
-            // 
-            this.dgv1_delay.HeaderText = "딜레이";
-            this.dgv1_delay.Name = "dgv1_delay";
-            this.dgv1_delay.ReadOnly = true;
-            this.dgv1_delay.Width = 70;
             // 
             // textBox6
             // 
